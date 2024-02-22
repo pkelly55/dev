@@ -67,7 +67,7 @@ def home(request):
         return redirect("blocked")
     
     # if IP is from a "bad" city, block it admin can change the city
-    if city == "Monroeville" or "Morgantown":
+    if city == "Lagos":
         messages.success(request, "You have been blocked from this site.")
         return redirect("blocked")
     

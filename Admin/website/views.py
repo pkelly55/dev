@@ -57,7 +57,7 @@ def home(request):
         #return redirect("home")
     
     # if IP is outside of the US, block it
-    if country == "United States":
+    if country != "United States":
         messages.success(request, "You have been blocked from this site.")
         return redirect("blocked")
    

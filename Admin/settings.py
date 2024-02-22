@@ -24,7 +24,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = "django-insecure-#4dr_4xe2sx3(x61xt4s61ztn$m#3q^&-+s3pe-0^%-v+ma-xa"
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG =True
+DEBUG = False
 # local , docker, All 
 ALLOWED_HOSTS = ['.vercel.app','*']
 
@@ -84,15 +84,15 @@ WSGI_APPLICATION = "Admin.wsgi.application"
 
 # Database
 # https://docs.djangoproject.com/en/5.0/ref/settings/#databases
-'''
+
 DATABASES = {
     "default": {
-        "ENGINE": "django.db.backends.mysql",
-        "NAME": "IncomingUser",
-        "USER": "root",
-        "PASSWORD": "Password123",
-        "HOST": "localhost",
-        "PORT": "3306",
+        "ENGINE": "django.db.backends.postgresql",
+        "NAME": "railway",
+        "USER": "postgres",
+        "PASSWORD": "A-cA3fA6FE34F*41cfDFB3GBA5gC*aFc",
+        "HOST": "viaduct.proxy.rlwy.net",
+        "PORT": "38911",
     }
 }
 '''
@@ -102,7 +102,7 @@ DATABASES = {
         'NAME': BASE_DIR / "db.sqlite3",  # Update the path if needed
     }
 }
-
+'''
 # Password validation
 # https://docs.djangoproject.com/en/5.0/ref/settings/#auth-password-validators
 

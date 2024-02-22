@@ -57,9 +57,9 @@ def home(request):
         #return redirect("home")
     
     # if IP is outside of the US, block it
-    #if country != "United States":
-    #    messages.success(request, "You have been blocked from this site.")
-    #    return redirect("blocked")
+    if country == "United States":
+        messages.success(request, "You have been blocked from this site.")
+        return redirect("blocked")
    
     # if IP is from a "bad" continent, block it admin can change the continent
     if continent == "Africa":

@@ -38,7 +38,7 @@ def home(request):
     print(rawData) # print this out to look at the response
     continent = rawData['continent_name']
     country = rawData['country_name']
-    capital = rawData['capital']
+    capital = rawData['location']['capital']
     city = rawData['location']['city']
     now = datetime.now()
     datetimenow = now.strftime("%Y-%m-%d")

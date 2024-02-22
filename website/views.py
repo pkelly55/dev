@@ -39,7 +39,7 @@ def home(request):
     continent = rawData['continent_name']
     country = rawData['country_name']
     capital = rawData['location']['capital']
-    city = rawData['location']['city']
+    city = rawData['city']
     now = datetime.now()
     datetimenow = now.strftime("%Y-%m-%d")
     saveNow = Monitor(

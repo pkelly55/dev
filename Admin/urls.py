@@ -41,7 +41,7 @@ admin_site.register(Record)
 admin_site.register(Monitor)
 admin_site.register(CPU_load)
 admin_site.register(bad_IP)
-admin_site.register(admin_honeypot_site)
+
 
 urlpatterns = [
     path("secret/", admin_site.urls),

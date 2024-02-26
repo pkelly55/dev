@@ -219,8 +219,7 @@ def upload(request):
                 record = form.save(commit=False)
 
                 # Handle the uploaded file and update the record with the file path
-                file_path = handle_uploaded_file(request.FILES["file"])
-                record.file_path = file_path
+                
                 record.save()
 
                 return redirect("home")
@@ -233,7 +232,7 @@ def upload(request):
     else:
         messages.success(request, "Please login to view this page.")
         return redirect("home")
-
+'''
 def handle_uploaded_file(uploaded_file):
     # Use the default storage backend (configured for S3 in production)
     file_path = f"uploads/{uploaded_file.name}"
@@ -248,7 +247,7 @@ def handle_uploaded_file(uploaded_file):
 
     # Return the file path (or relevant information for further processing)
     return file_path
-
+'''
 def traffic_monitor(request):
     # is authenticated as a user
     if request.user.is_authenticated:

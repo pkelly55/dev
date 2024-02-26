@@ -187,27 +187,24 @@ def add_record(request):
 
 
 def edit_record(request, pk):
-
     if request.user.is_authenticated:
         current_record = Record.objects.get(id=pk)
-        form = AddRecordForm(
-            request.POST, request.FILES or None, instance=current_record
-        )
+
         if request.method == "POST":
-            form = AddRecordForm(
-            request.POST, request.FILES or None, instance=current_record
-        )
+            form = AddRecordForm(request.POST, request.FILES or None, instance=current_record)
             if form.is_valid():
-                
                 form.save()
                 messages.success(request, "Record updated successfully!")
                 return redirect("home")
-        return render(request, "edit_record.html", {"form": form},)
+        else:
+            # If it's a GET request, pre-fill the form with existing data
+            form = AddRecordForm(instance=current_record)
+
+        return render(request, "edit_record.html", {"form": form})
     else:
         messages.success(request, "Please login to view this page.")
         return redirect("home")
-
-
+    
 def upload(request):
     if request.user.is_authenticated:
         if request.method == "POST":

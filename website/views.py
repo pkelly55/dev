@@ -1,3 +1,4 @@
+import hashlib
 from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login, logout 
 from django.contrib import messages
@@ -8,7 +9,7 @@ import time
 import psutil
 import requests
 from datetime import datetime
-from .models import Monitor , CPU_load
+from .models import Monitor , CPU_load , bad_IP
 from urllib.parse import urlparse
 from django.core.paginator import Paginator
 
@@ -55,34 +56,41 @@ def home(request):
 
         # messages.success(request, "You have been blocked from this site.")
         #return redirect("home")
-    
+    ''' local host block
+    if ip == "127.0.0.1":
+        messages.success(request, "You have been blocked from this site.")
+        return redirect("blocked")
+    '''
     # if IP is outside of the US, block it
     if country != "United States":
         messages.success(request, "You have been blocked from this site.")
         return redirect("blocked")
    
     # if IP is from a "bad" continent, block it admin can change the continent
-    if continent == "Africa":
-        messages.success(request, "You have been blocked from this site.")
-        return redirect("blocked")
-    
-    # if IP is from a "bad" city, block it admin can change the city
-    if city == "Lagos":
-        messages.success(request, "You have been blocked from this site.")
-        return redirect("blocked")
-    
-    # if IP is from a "bad" capital, block it admin can change the capital
-    if capital == "Abuja":
-        messages.success(request, "You have been blocked from this site.")
-        # throw a 404 error
-        return redirect("blocked")
-    
-    # if IP is from a "bad" country, block it admin can change the country
-    if country == "Russia":
-        messages.success(request, "You have been blocked from this site.")
-        return redirect("blocked")
-    
+    # if continent == "Africa":
+    #     messages.success(request, "You have been blocked from this site.")
+    #     return redirect("blocked")
 
+    # hash the IP address
+    hashed_ip = hashlib.md5(ip.encode()).hexdigest()
+    
+    # check if the hashed IP is in the database
+    
+    # if the IP is in bad_IP table, block the user
+    if bad_IP.objects.filter(ip=hashed_ip).count() > 0:
+        messages.success(request, "You have been blocked from this site.")
+        return redirect("blocked")
+    
+    # get the user's browser
+    
+    user_agent = request.META['HTTP_USER_AGENT']
+    print (user_agent)
+    
+    # check if the user is using a "bad" browser
+    #if "Chrome" not in user_agent:
+    #    messages.success(request, "You have been blocked from this site.")
+    #    return redirect("blocked")
+    
     records = Record.objects.all()
     
     # check if logging in
@@ -266,7 +274,17 @@ def traffic_monitor(request):
             "ram_usage": ram_usage,
             "dataSaved": page1,
         }
-        
+        saveNow = CPU_load(
+            cpu_usage=cpu_usage,
+            ram_usage=ram_usage,
+            totalSiteVisits=totalSiteVisits,
+            now=now
+        )
+        # every 15 minutes save
+        for i in range(15):
+            saveNow.save()
+            time.sleep(60)
+             
 
         
         return render(request, 'monitor.html', data)

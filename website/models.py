@@ -6,6 +6,15 @@ from datetime import datetime
 # Create your models here.
 
 
+class bad_IP(models.Model): 
+    # This is a model for the admin to add 'bad IP' addresses to block. 
+    ip = models.CharField(max_length=50)
+    
+
+    def __str__(self):
+        return self.ip
+
+
 class CPU_load(models.Model):
     cpu_usage = models.FloatField()
     ram_usage = models.FloatField()

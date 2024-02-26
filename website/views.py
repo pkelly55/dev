@@ -209,30 +209,21 @@ def edit_record(request, pk):
 
 
 def upload(request):
-    context = {}
-
     if request.user.is_authenticated:
         if request.method == "POST":
             form = AddRecordForm(request.POST, request.FILES)
             if form.is_valid():
-                # Save the form to create a database record
-                record = form.save(commit=False)
-
-                # Handle the uploaded file and update the record with the file path
-                
-                record.save()
-
+                form.save()
                 return redirect("home")
             else:
                 context["form"] = form
                 return render(request, "upload.html", context)
-
-        context["form"] = AddRecordForm()
+        context = {"form": AddRecordForm()}
         return render(request, "upload.html", context)
     else:
         messages.success(request, "Please login to view this page.")
         return redirect("home")
-
+    
 def handle_uploaded_file(uploaded_file):
     # Use the default storage backend (configured for S3 in production)
     file_path = f"uploads/{uploaded_file.name}"

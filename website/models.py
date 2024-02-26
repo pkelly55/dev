@@ -11,6 +11,8 @@ class CPU_load(models.Model):
     ram_usage = models.FloatField()
     totalSiteVisits = models.IntegerField()
     now = models.DateTimeField(auto_now_add=True)
+    
+
     def __str__(self):
         return str(self.now)
 

@@ -14,7 +14,7 @@ urlpatterns = [
     path("add_record/", views.add_record, name="add_record"),
     path("edit_record/<int:pk>", views.edit_record, name="edit_record"),
     # path("business_record/", views.B_record, name="B_record"),
-    path("upload/", views.upload, name="upload"),
+    path("upload/", views.add_record, name="add_record"),
     path("monitor/", views.traffic_monitor, name="monitor"),
     path("password_reset/",auth_views.PasswordResetView.as_view(template_name='password_reset_form.html'),name="password_reset"),
     path("password_reset_done/",auth_views.PasswordResetDoneView.as_view(template_name='password_reset_done.html'),name="password_reset_done"),

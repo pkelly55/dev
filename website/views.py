@@ -72,19 +72,18 @@ def home(request):
     #     return redirect("blocked")
 
     # hash the IP address
-    hashed_ip = hashlib.md5(ip.encode()).hexdigest()
+    
     
     # check if the hashed IP is in the database
     
     # if the IP is in bad_IP table, block the user
-    if bad_IP.objects.filter(ip=hashed_ip).count() > 0:
+    if bad_IP.objects.filter(ip=ip).exists():
         messages.success(request, "You have been blocked from this site.")
         return redirect("blocked")
     
     # get the user's browser
     
-    user_agent = request.META['HTTP_USER_AGENT']
-    print (user_agent)
+    
     
     # check if the user is using a "bad" browser
     #if "Chrome" not in user_agent:

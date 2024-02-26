@@ -23,7 +23,7 @@ from django.contrib.auth.models import User, Group
 from django_otp.admin import OTPAdminSite
 from django_otp.plugins.otp_totp.models import TOTPDevice
 from django_otp.plugins.otp_totp.admin import TOTPDeviceAdmin
-from website.models import Record , Monitor
+from website.models import Record , Monitor, CPU_load, bad_IP
 
 class OTPAdmin(OTPAdminSite):
    pass
@@ -39,8 +39,9 @@ admin_site.register(TOTPDevice, TOTPDeviceAdmin)
 
 admin_site.register(Record)
 admin_site.register(Monitor)
-
-
+admin_site.register(CPU_load)
+admin_site.register(bad_IP)
+admin_site.register(admin_honeypot_site)
 
 urlpatterns = [
     path("secret/", admin_site.urls),

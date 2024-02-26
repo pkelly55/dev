@@ -12,7 +12,7 @@ class CPU_load(models.Model):
     totalSiteVisits = models.IntegerField()
     now = models.DateTimeField(auto_now_add=True)
     
-    
+
 
     def __str__(self):
         return str(self.now)
@@ -41,7 +41,6 @@ class Record(models.Model):
     zipcode = models.CharField(max_length=200)
     country = models.CharField(max_length=200)
     date_added = models.DateTimeField(auto_now_add=True)
-    
     
 
     def __str__(self):

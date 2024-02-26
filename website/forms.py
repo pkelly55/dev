@@ -127,13 +127,8 @@ class AddRecordForm(forms.ModelForm):
             attrs={"class": "form-control", "placeholder": "Country"}
         ),
     )
-    title = forms.CharField(max_length=50)
-    file = forms.FileField(
-        label="",
-        widget=forms.FileInput(
-            attrs={"class": "form-control", "placeholder": "Upload File"}
-        ),
-    )
+    
+    
 
     class Meta:
         model = Record

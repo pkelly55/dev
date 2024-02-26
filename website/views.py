@@ -238,6 +238,9 @@ def handle_uploaded_file(uploaded_file):
     # Use the default storage backend (configured for S3 in production)
     file_path = f"uploads/{uploaded_file.name}"
 
+    # Create the directory if it doesn't exist
+    os.makedirs(os.path.dirname(file_path), exist_ok=True)
+
     # Save the file to the cloud storage (replace this with S3 or other storage backend logic)
     with open(file_path, 'wb+') as destination:
         for chunk in uploaded_file.chunks():

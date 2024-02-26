@@ -184,10 +184,6 @@ def add_record(request):
         return redirect("home")
 
 
-def handle_uploaded_file(f):
-    with open("some/file/name.txt", "wb+") as destination:
-        for chunk in f.chunks():
-            destination.write(chunk)
 
 
 def edit_record(request, pk):
@@ -213,20 +209,42 @@ def edit_record(request, pk):
 
 
 def upload(request):
+    context = {}
+
     if request.user.is_authenticated:
         if request.method == "POST":
             form = AddRecordForm(request.POST, request.FILES)
             if form.is_valid():
-                form.save()
+                # Save the form to create a database record
+                record = form.save(commit=False)
+
+                # Handle the uploaded file and update the record with the file path
+                file_path = handle_uploaded_file(request.FILES["file"])
+                record.file_path = file_path
+                record.save()
+
                 return redirect("home")
             else:
                 context["form"] = form
                 return render(request, "upload.html", context)
-        context = {"form": AddRecordForm()}
+
+        context["form"] = AddRecordForm()
         return render(request, "upload.html", context)
     else:
         messages.success(request, "Please login to view this page.")
         return redirect("home")
+
+def handle_uploaded_file(uploaded_file):
+    # Use the default storage backend (configured for S3 in production)
+    file_path = f"uploads/{uploaded_file.name}"
+
+    # Save the file to the cloud storage (replace this with S3 or other storage backend logic)
+    with open(file_path, 'wb+') as destination:
+        for chunk in uploaded_file.chunks():
+            destination.write(chunk)
+
+    # Return the file path (or relevant information for further processing)
+    return file_path
 
 def traffic_monitor(request):
     # is authenticated as a user

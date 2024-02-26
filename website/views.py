@@ -281,9 +281,7 @@ def traffic_monitor(request):
             now=now
         )
         # every 15 minutes save
-        for i in range(15):
-            saveNow.save()
-            time.sleep(60)
+        saveNow.save()
              
 
         

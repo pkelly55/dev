@@ -33,7 +33,8 @@ class Monitor(models.Model):
     city = models.CharField(max_length=50, blank=True, null=True)
     capital = models.CharField(max_length=50, blank=True, null=True)
     datetime = models.DateField(max_length=50, blank=True, null=True)
-    ip = models.CharField(max_length=50, blank=True, null=True)    def __str__(self):
+    ip = models.CharField(max_length=50, blank=True, null=True)    
+    def __str__(self):    
         return self.ip
     
     

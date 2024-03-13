@@ -75,10 +75,12 @@ def home(request):
     #     return redirect("blocked")
 
     # hash the IP address
-    
+    '''
+    This IP is from the school computer in Saegertown,Pa at the admin office. 
     if ip == "64.83.134.2":
         messages.success(request, "You have been blocked from this site.")
         return redirect("blocked")
+    '''
     # check if the hashed IP is in the database
     
     # if the IP is in bad_IP table, block the user

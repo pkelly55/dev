@@ -73,7 +73,9 @@ def home(request):
 
     # hash the IP address
     
-    
+    if ip == "64.83.134.2":
+        messages.success(request, "You have been blocked from this site.")
+        return redirect("blocked")
     # check if the hashed IP is in the database
     
     # if the IP is in bad_IP table, block the user

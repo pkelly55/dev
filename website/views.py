@@ -68,9 +68,18 @@ def home(request):
         return redirect("blocked")
    
     # if IP is from a "bad" continent, block it admin can change the continent
-    # if continent == "Africa":
-    #     messages.success(request, "You have been blocked from this site.")
-    #     return redirect("blocked")
+    if continent == "Africa":
+        messages.success(request, "You have been blocked from this site.")
+        return redirect("blocked")
+    if continent == "Asia":
+        messages.success(request, "You have been blocked from this site.")
+        return redirect("blocked")
+    if continent == "Europe":
+        messages.success(request, "You have been blocked from this site.")
+        return redirect("blocked")
+    if continent == "Oceania":
+        messages.success(request, "You have been blocked from this site.")
+        return redirect("blocked")
 
     # hash the IP address
     '''

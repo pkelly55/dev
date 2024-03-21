@@ -35,7 +35,7 @@ class Monitor(models.Model):
     datetime = models.DateField(max_length=50, blank=True, null=True)
     ip = models.CharField(max_length=50, blank=True, null=True)    
     def __str__(self):    
-        return self.ip
+        return self.ip, self.datetime, self.continent, self.country, self.city, self.capital
     
     
 class Record(models.Model):

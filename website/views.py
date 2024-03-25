@@ -66,7 +66,7 @@ def home(request):
     if country != "United States":
         messages.success(request, "You have been blocked from this site.")
         return redirect("blocked")
-   
+    '''
     # if IP is from a "bad" continent, block it admin can change the continent
     if continent == "Africa":
         messages.success(request, "You have been blocked from this site.")
@@ -80,7 +80,7 @@ def home(request):
     if continent == "Oceania":
         messages.success(request, "You have been blocked from this site.")
         return redirect("blocked")
-
+    '''
     # hash the IP address
     '''
     This IP is from the school computer in Saegertown,Pa at the admin office. 
